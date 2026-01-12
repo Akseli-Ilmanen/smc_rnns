@@ -14,7 +14,6 @@ def ensure_length_is_even(x):
     if n % 2 != 0:
         x = x[:-1]
         n = len(x)
-    x = np.reshape(x, (1, n))
     return x
 
 
@@ -74,8 +73,8 @@ def power_spectrum_helling_per_dim(x_gen, x_true, smoothing, freq_cutoff):
     for dim in range(dim_x):
         spectrum_true = get_average_spectrum(x_true[:, :, dim], smoothing)
         spectrum_gen = get_average_spectrum(x_gen[:, :, dim], smoothing)
-        spectrum_true = spectrum_true[:, :freq_cutoff]
-        spectrum_gen = spectrum_gen[:, :freq_cutoff]
+        spectrum_true = spectrum_true[:freq_cutoff]
+        spectrum_gen = spectrum_gen[:freq_cutoff]
         spectrum_true /= np.sum(spectrum_true)
         spectrum_gen /= np.sum(spectrum_gen)
         hellinger_dist = (1 / np.sqrt(2)) * np.sqrt(
